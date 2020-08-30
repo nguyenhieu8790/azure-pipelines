@@ -26,7 +26,7 @@ stages:
     - script: |
         ls -al
         rm -f README.md
-        sleep 60
+        sleep 1
       displayName: step2
 
   - job: test 
@@ -36,7 +36,27 @@ stages:
     steps:
     - script: |
         ls -al
-      displayName: test   
+      displayName: test
+      
+  - job: test_fail
+    displayName: test fail
+    dependsOn: test
+    condition: failed()
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - script: echo test is failed
+      displayName: test failed
+
+  - job: test_success
+    displayName: test success
+    dependsOn: test
+    condition: succeeded()
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - script: echo test is success
+      displayName: test success 
 
 - stage: deploy 
   displayName: deploy stage
@@ -46,10 +66,9 @@ stages:
     pool:
       vmImage: 'windows-latest'
     steps:
-    - script: dir
-      displayName: step1       
-        
+    - script: abcxyz
+      displayName: step1   
     - script: |
         whoami
         printenv
-      displayName: step2   
+      displayName: step2
