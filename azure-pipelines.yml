@@ -18,10 +18,8 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-    - displayName: hello-displayname1
-      script: printenv
+    - script: printenv
         
-    - displayName: hello-displayname1
-      script: |
+    - script: |
         whoami
         printenv
