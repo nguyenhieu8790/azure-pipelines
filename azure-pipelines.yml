@@ -25,3 +25,19 @@ stages:
         whoami
         printenv
       displayName: step2   
+
+- stage: deploy 
+  displayName: deploy stage
+  jobs:  
+  - job: deploy 
+    displayName: deploy 1st appp
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - script: printenv
+      displayName: step1       
+        
+    - script: |
+        whoami
+        printenv
+      displayName: step2   
