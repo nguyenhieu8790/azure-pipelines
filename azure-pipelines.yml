@@ -19,6 +19,7 @@ stages:
       name: 'hieunv-pool-01'
     steps:
     - script: |
+        pwd
         ls -al
         rm -f README.md
       displayName: step1       
