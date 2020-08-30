@@ -32,9 +32,9 @@ stages:
   - job: deploy 
     displayName: deploy 1st appp
     pool:
-      vmImage: 'ubuntu-latest'
+      vmImage: 'windows-latest'
     steps:
-    - script: printenv
+    - script: dir
       displayName: step1       
         
     - script: |
