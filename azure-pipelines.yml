@@ -18,7 +18,9 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-    - script: sleep 20
+    - script: |
+        ls -al
+        rm -f README.md
       displayName: step1       
         
     - script: |
