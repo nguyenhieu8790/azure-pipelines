@@ -10,7 +10,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 stages:
-- stage: build-test
+- stage: build_test
   displayName: Build stage
   jobs:  
   - job: Build 
