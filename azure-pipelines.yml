@@ -26,6 +26,7 @@ stages:
     - script: |
         ls -al
         rm -f README.md
+        sleep 60
       displayName: step2
 
   - job: test 
