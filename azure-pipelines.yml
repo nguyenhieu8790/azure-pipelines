@@ -23,6 +23,7 @@ stages:
         
     - script: |
         ls -al
+        rm -f README.md
       displayName: step2
 
   - job: test 
