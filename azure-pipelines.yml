@@ -18,12 +18,11 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-    - script: printenv
+    - script: sleep 20
       displayName: step1       
         
     - script: |
-        whoami
-        printenv
+        ls -al
       displayName: step2
 
   - job: test 
@@ -32,8 +31,7 @@ stages:
       vmImage: 'ubuntu-latest'
     steps:
     - script: |
-        whoami
-        printenv
+        ls -al
       displayName: test   
 
 - stage: deploy 
