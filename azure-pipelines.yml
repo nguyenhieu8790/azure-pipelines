@@ -19,7 +19,9 @@ stages:
       vmImage: 'ubuntu-latest'
     steps:
     - script: printenv
+      displayName: step1       
         
     - script: |
         whoami
         printenv
+      displayName: step2   
