@@ -36,7 +36,7 @@ stages:
   - deployment: DeployWeb
     displayName: deploy Web App
     pool:
-      vmImage: 'hieunv-pool-01'
+      name: 'hieunv-pool-01'
     # creates an environment if it doesn't exist
     environment: 'smarthotel-dev'
     strategy:
