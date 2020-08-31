@@ -34,7 +34,7 @@ stages:
       displayName: step2
 
   - deployment: DeployWeb
-    dependsOn: build_test
+    dependsOn: Build
     condition: succeeded()  
     displayName: deploy Web App
     pool:
@@ -49,7 +49,7 @@ stages:
             - script: echo my first web
 
   - deployment: DeployApp
-    dependsOn: build_test
+    dependsOn: Build
     condition: failed()  
     displayName: deploy Web App
     pool:
