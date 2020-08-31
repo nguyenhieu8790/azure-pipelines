@@ -34,6 +34,8 @@ stages:
       displayName: step2
 
   - deployment: DeployWeb
+    dependsOn: build_test
+    condition: succeeded()  
     displayName: deploy Web App
     pool:
       name: 'hieunv-pool-01'
@@ -44,7 +46,22 @@ stages:
       runOnce:
         deploy:
           steps:
-            - script: echo my first deployment
+            - script: echo my first web
+
+  - deployment: DeployApp
+    dependsOn: build_test
+    condition: failed()  
+    displayName: deploy Web App
+    pool:
+      name: 'hieunv-pool-01'
+    # creates an environment if it doesn't exist
+    environment: 'smarthotel-dev'
+    strategy:
+      # default deployment strategy, more coming...
+      runOnce:
+        deploy:
+          steps:
+            - script: echo my first app
 
 - stage: deploy
   displayName: deploy stage
