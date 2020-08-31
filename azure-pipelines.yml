@@ -12,8 +12,8 @@ pool:
 stages:
 - stage: build_test
   displayName: Build stage
-  jobs:  
-  - job: Build 
+  jobs:
+  - job: Build
     displayName: Build 1
     pool:
       name: 'hieunv-pool-01'
@@ -25,30 +25,45 @@ stages:
         ls -al
         rm -f README.md
         sleep 60
-      displayName: step1       
-        
+      displayName: step1
+
     - script: |
         ls -al
         rm -f README.md
         sleep 1
       displayName: step2
 
-  - job: test 
-    displayName: Build 2
+  - deployment: DeployWeb
+    displayName: deploy Web App
+    pool:
+      vmImage: 'hieunv-pool-01'
+    # creates an environment if it doesn't exist
+    environment: 'smarthotel-dev'
+    strategy:
+      # default deployment strategy, more coming...
+      runOnce:
+        deploy:
+          steps:
+            - script: echo my first deployment
+
+- stage: deploy
+  displayName: deploy stage
+  jobs:
+  - job: deploy
+    displayName: deploy 1st appp
     pool:
       name: 'hieunv-pool-01'
     steps:
+    - script: echo 123
+      displayName: step1
     - script: |
-        hostname
         whoami
-        pwd
-        ls -al
-        rm -f README.md
-      displayName: test
-      
-  - job: test_fail
+        printenv
+      displayName: step2
+
+  - job: deploy_fail
     displayName: test fail
-    dependsOn: test
+    dependsOn: deploy
     condition: failed()
     pool:
       name: 'hieunv-pool-01'
@@ -56,27 +71,12 @@ stages:
     - script: echo test is failed
       displayName: test failed
 
-  - job: test_success
+  - job: deploy_success
     displayName: test success
-    dependsOn: test
+    dependsOn: deploy
     condition: succeeded()
     pool:
       name: 'hieunv-pool-01'
     steps:
     - script: echo test is success
-      displayName: test success 
-
-- stage: deploy 
-  displayName: deploy stage
-  jobs:  
-  - job: deploy 
-    displayName: deploy 1st appp
-    pool:
-      name: 'hieunv-pool-01'
-    steps:
-    - script: abcxyz
-      displayName: step1   
-    - script: |
-        whoami
-        printenv
-      displayName: step2
+      displayName: test success
